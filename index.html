@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>VK ID Авторизация</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f0f2f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .vk-button {
-      padding: 15px 30px;
-      font-size: 18px;
-      color: white;
-      background-color: #0077ff;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .vk-button:hover {
-      background-color: #005ecb;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Авторизация через VK ID (SDK)</title>
 </head>
 <body>
-  <h1>Войти через VK ID</h1>
+  <h2>Войти через VK ID</h2>
+  <div id="vkid_container"></div>
 
-  <a class="vk-button" href="https://id.vk.com/auth?app_id=53336238&redirect_uri=https://vk-auth-test.onrender.com/vk-callback.html&response_mode=code">
-    Войти через VK ID
-  </a>
+  <script src="https://id.vk.com/sdk/vkid.min.js"></script>
+  <script>
+    if ("VKIDSDK" in window) {
+      const VKID = window.VKIDSDK;
+
+      VKID.Config.init({
+        app: 53336238,
+        redirectUri: "https://vk-auth-test.onrender.com/vk-callback.html",
+        responseMode: VKID.ConfigResponseMode.Callback,
+        source: VKID.ConfigSource.LOWCODE
+      });
+
+      const oneTap = new VKID.OneTap();
+
+      oneTap.render({
+        container: document.getElementById("vkid_container"),
+        showAlternativeLogin: true
+      });
+
+      oneTap
+        .on(VKID.WidgetEvents.ERROR, function (error) {
+          console.error("Ошибка VK ID:", error);
+        })
+        .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
+          const { code, device_id } = payload;
+
+          VKID.Auth.exchangeCode(code, device_id)
+            .then(data => {
+              console.log("Успешный вход через VK ID", data);
+              // Можно передать на backend
+            })
+            .catch(error => {
+              console.error("Ошибка при обмене кода", error);
+            });
+        });
+    } else {
+      console.error("VKIDSDK не определён");
+    }
+  </script>
 </body>
 </html>
