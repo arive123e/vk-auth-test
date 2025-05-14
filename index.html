@@ -2,26 +2,40 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Войти через VK ID</title>
-  <script src="https://id.vk.com/sdk.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    a.vk-button {
+      display: inline-block;
+      background-color: #4a76a8;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    a.vk-button:hover {
+      background-color: #3b5a7a;
+    }
+  </style>
 </head>
 <body>
   <h1>Войти через VK ID</h1>
-  <div id="vk_id_login"></div>
 
-  <script>
-    VKIDSDK.init({
-      app: 5335238, // замени на свой ID приложения VK
-      redirect_url: 'https://vk-auth-test.onrender.com/vk-callback.html',
-      state: '123abc' // любое значение, по желанию
-    });
-
-    VKIDSDK.Auth.getLoginButton('vk_id_login', {
-      callback: function(userData) {
-        console.log("User data:", userData);
-      }
-    });
-  </script>
+  <a
+    class="vk-button"
+    href="https://id.vk.com/auth?app_id=53336238&redirect_uri=https%3A%2F%2Fvk-auth-test.onrender.com%2Fvk-callback.html"
+  >
+    Продолжить с VK
+  </a>
 </body>
 </html>
+
