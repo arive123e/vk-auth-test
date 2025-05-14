@@ -8,14 +8,15 @@
   <h2>Войти через VK ID</h2>
   <div id="vkid_container"></div>
 
-  <script src="https://unpkg.com/@vkid/sdk/dist/sdk.umd/index.js"></script>
+  <!-- Подключаем SDK с официального CDN VK -->
+  <script src="https://id.vk.com/sdk/vkid.min.js"></script>
   <script>
     if ("VKIDSDK" in window) {
       const VKID = window.VKIDSDK;
 
       VKID.Config.init({
-        app: 53335238, // ← Твой ID приложения VK
-        redirectUri: "https://resilient-salamander-e3352c.netlify.app/vk-callback.html", // путь к vk-callback
+        app: 53335238,
+        redirectUri: "https://arive123e.github.io/vk-auth-test/vk-callback.html", // обновили ссылку
         responseMode: VKID.ConfigResponseMode.Callback,
         source: VKID.ConfigSource.LOWCODE,
         scope: ""
@@ -38,12 +39,14 @@
           VKID.Auth.exchangeCode(code, device_id)
             .then(data => {
               console.log("Успешный вход через VK ID", data);
-              // Здесь можно что-нибудь сделать: отправить на сервер и т.д.
+              // Тут можно отправить на backend
             })
             .catch(error => {
               console.error("Ошибка при обмене кода", error);
             });
         });
+    } else {
+      console.error("VKIDSDK не определён");
     }
   </script>
 </body>
