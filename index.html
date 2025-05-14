@@ -3,21 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <title>Авторизация через VK ID</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f5f5f5;
+      font-family: sans-serif;
+    }
+
+    .vk-button {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background-color: #0077FF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s ease;
+    }
+
+    .vk-button:hover {
+      background-color: #005ecb;
+    }
+
+    .vk-icon {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Войти через VK ID</h2>
-  <button onclick="loginWithVK()">Войти</button>
-
-  <script>
-    function loginWithVK() {
-      const appId = 53335238;
-      const redirectUri = encodeURIComponent("https://vk-auth-test.vercel.app/vk-callback.html");
-      const responseType = "code";
-      const state = "random_state_string"; // можно сгенерировать
-
-      const authUrl = `https://id.vk.com/auth?app=${appId}&redirect_uri=${redirectUri}&response_type=${responseType}&state=${state}`;
-      window.location.href = authUrl;
-    }
-  </script>
+  <a class="vk-button" href="https://id.vk.com/auth?app_id=53335238&redirect_uri=https://vk-auth-test.vercel.app/vk-callback.html">
+    <img class="vk-icon" src="https://cdn.icon-icons.com/icons2/2429/PNG/512/vk_logo_icon_147266.png" alt="VK">
+    Войти через VK ID
+  </a>
 </body>
 </html>
+
