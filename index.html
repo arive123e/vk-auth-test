@@ -6,15 +6,18 @@
 </head>
 <body>
   <h2>Войти через VK ID</h2>
+  <button onclick="loginWithVK()">Войти</button>
 
-  <iframe
-    src="https://id.vk.com/auth?app_id=53335238&response_type=code&redirect_uri=https://vk-auth-test.vercel.app/vk-callback.html"
-    width="300"
-    height="100"
-    style="border: none; overflow: hidden;"
-    allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  ></iframe>
+  <script>
+    function loginWithVK() {
+      const appId = 53335238;
+      const redirectUri = encodeURIComponent("https://vk-auth-test.vercel.app/vk-callback.html");
+      const responseType = "code";
+      const state = "random_state_string"; // можно сгенерировать
 
+      const authUrl = `https://id.vk.com/auth?app=${appId}&redirect_uri=${redirectUri}&response_type=${responseType}&state=${state}`;
+      window.location.href = authUrl;
+    }
+  </script>
 </body>
 </html>
