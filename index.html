@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Авторизация через VK ID</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-family: Inter, sans-serif;
-      background-color: #fff;
-    }
-    .vk-button {
-      background-color: #0077FF;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 500;
-      border: none;
-      border-radius: 8px;
-      padding: 14px 24px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .vk-button:hover {
-      background-color: #006ae6;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Авторизация через VK ID</title>
+    <style>
+        .vk-auth-button {
+            background-color: #07f;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Segoe UI', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .vk-auth-button:hover {
+            background-color: #0066dd;
+        }
+    </style>
 </head>
 <body>
-  <h1>Авторизация через VK ID</h1>
-  <a class="vk-button" href="https://id.vk.com/auth?app_id=53336238&redirect_uri=https://vk-auth-test.onrender.com/vk-callback.html">
-    Войти с VK ID
-  </a>
+    <a id="vk-auth-link" class="vk-auth-button">Войти через VK ID</a>
+
+    <script>
+        const appId = '51797138';
+        const redirectUri = 'https://vk-auth-test.onrender.com/callback'; // именно этот путь указан в VK
+        const state = 'csrf_' + Math.random().toString(36).substring(2);
+        const url = new URL('https://id.vk.com/auth');
+
+        url.searchParams.set('app_id', appId);
+        url.searchParams.set('redirect_uri', redirectUri);
+        url.searchParams.set('response_type', 'code');
+        url.searchParams.set('state', state);
+
+        document.getElementById('vk-auth-link').setAttribute('href', url.toString());
+    </script>
 </body>
 </html>
