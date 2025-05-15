@@ -3,38 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Авторизация через VK ID</title>
+  <title>Вход через VK ID</title>
   <style>
     .vk-auth-button {
+      display: inline-block;
       background: #0077FF;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 16px;
-      padding: 12px 24px;
+      color: white;
       border: none;
+      padding: 12px 24px;
       border-radius: 8px;
+      font-size: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       cursor: pointer;
       text-decoration: none;
-      display: inline-block;
+      text-align: center;
     }
     .vk-auth-button:hover {
-      background: #005ec2;
+      background: #005ecc;
     }
     body {
       display: flex;
-      height: 100vh;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #f9f9f9;
+      height: 100vh;
+      font-family: sans-serif;
     }
   </style>
 </head>
 <body>
-  <a
-    class="vk-auth-button"
-    href="https://id.vk.com/auth?app_id=51797138&redirect_uri=https%3A%2F%2Fvk-auth-test.onrender.com%2Fcallback.html&response_type=code&state=csrf_token_test&v=5.199">
-    Войти через VK ID
-  </a>
+  <h1>Авторизация через VK ID</h1>
+  <a id="vk-auth-link" class="vk-auth-button">Войти через VK ID</a>
+
+  <script>
+    const vkAuthUrl = new URL("https://id.vk.com/auth");
+    vkAuthUrl.searchParams.set("app_id", "51797138");
+    vkAuthUrl.searchParams.set("redirect_uri", "https://vk-auth-test.onrender.com/callback"); // 👈 ключевая правка
+    vkAuthUrl.searchParams.set("response_type", "code");
+    vkAuthUrl.searchParams.set("state", "csrf_" + Math.random().toString(36).substring(2));
+    vkAuthUrl.searchParams.set("v", "5.199");
+
+    document.getElementById("vk-auth-link").href = vkAuthUrl.toString();
+  </script>
 </body>
 </html>
-
