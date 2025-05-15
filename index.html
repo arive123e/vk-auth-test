@@ -2,40 +2,41 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>VK ID</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Авторизация через VK ID</title>
   <style>
     .vk-auth-button {
+      display: inline-block;
       background: #0077FF;
       color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-size: 16px;
       font-family: "Segoe UI", sans-serif;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 24px;
+      cursor: pointer;
       text-decoration: none;
-      display: inline-block;
+      text-align: center;
+    }
+    .vk-auth-button:hover {
+      background: #005FCC;
     }
   </style>
 </head>
 <body>
-  <a
-    class="vk-auth-button"
-    id="vkLoginButton"
-    href="#"
-  >
+  <a href="#" class="vk-auth-button" id="vkLoginButton">
     Войти через VK ID
   </a>
 
   <script>
-    const button = document.getElementById("vkLoginButton");
-    const app_id = "53336238";
-    const redirect_uri = "https://vk-auth-test.onrender.com/callback.html";
-    const state = "csrf_token_test";
-    const version = "5.199";
+    const vkAuthUrl = new URL('https://id.vk.com/auth');
+    vkAuthUrl.searchParams.set('app_id', '53336238'); // твой app_id
+    vkAuthUrl.searchParams.set('redirect_uri', 'https://vk-auth-test.onrender.com/callback.html'); // доверенный URL
+    vkAuthUrl.searchParams.set('response_type', 'code');
+    vkAuthUrl.searchParams.set('state', 'csrf_token_test');
+    vkAuthUrl.searchParams.set('v', '5.199');
 
-    const authUrl = `https://id.vk.com/auth?app_id=${app_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&state=${state}&v=${version}`;
-    button.href = authUrl;
+    document.querySelector('.vk-auth-button').href = vkAuthUrl.toString();
   </script>
 </body>
 </html>
-
