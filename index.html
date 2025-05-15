@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Авторизация через VK ID</title>
-    <style>
-        .vk-auth-button {
-            background-color: #07f;
-            color: #fff;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: 'Segoe UI', sans-serif;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .vk-auth-button:hover {
-            background-color: #0066dd;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Вход через VK ID</title>
+  <style>
+    .vk-auth-button {
+      display: inline-block;
+      background: #0077FF;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .vk-auth-button:hover {
+      background: #005ecc;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+  </style>
 </head>
 <body>
-    <a id="vk-auth-link" class="vk-auth-button">Войти через VK ID</a>
+  <h1>Авторизация через VK ID</h1>
+  <a id="vk-auth-link" class="vk-auth-button">Войти через VK ID</a>
 
-    <script>
-        const appId = '51797138';
-        const redirectUri = 'https://vk-auth-test.onrender.com/callback'; // именно этот путь указан в VK
-        const state = 'csrf_' + Math.random().toString(36).substring(2);
-        const url = new URL('https://id.vk.com/auth');
+  <script>
+    const vkAuthUrl = new URL("https://id.vk.com/auth");
+    vkAuthUrl.searchParams.set("app_id", "51797138"); // Твой VK App ID
+    vkAuthUrl.searchParams.set("redirect_uri", "https://vk-auth-test.onrender.com/callback"); // Обязательно БЕЗ .html
+    vkAuthUrl.searchParams.set("response_type", "code");
+    vkAuthUrl.searchParams.set("state", "csrf_token_" + Math.random().toString(36).substring(2));
+    vkAuthUrl.searchParams.set("v", "5.199");
 
-        url.searchParams.set('app_id', appId);
-        url.searchParams.set('redirect_uri', redirectUri);
-        url.searchParams.set('response_type', 'code');
-        url.searchParams.set('state', state);
-
-        document.getElementById('vk-auth-link').setAttribute('href', url.toString());
-    </script>
+    document.getElementById("vk-auth-link").href = vkAuthUrl.toString();
+  </script>
 </body>
 </html>
