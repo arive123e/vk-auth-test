@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Вход через VK ID</title>
+    <meta charset="UTF-8">
+    <title>Авторизация через VK ID</title>
+    <script src="https://id.vk.com/sdk.js"></script>
 </head>
 <body>
-  <h1>Авторизация через VK ID</h1>
+    <h2>Авторизация через VK ID</h2>
+    
+    <!-- Контейнер для кнопки -->
+    <div id="vk-id-container"></div>
 
-  <!-- Элемент для кнопки -->
-  <div id="vk-id-widget"></div>
-
-  <!-- SDK должен быть подключён ДО вызова VKIDSDK.init -->
-  <script src="https://vk.com/js/api/openapi.js?169" async></script>
-  <script>
-    window.onload = function () {
-      if (typeof VKIDSDK !== 'undefined') {
+    <script>
+        // Замените app_id на ваш VK ID (53336238)
         VKIDSDK.init({
-          app_id: 53336238,
-          redirect_uri: 'https://vk-auth-test.onrender.com/callback.html',
-          state: 'csrf_token_123',
-          widget: {
-            appendTo: '#vk-id-widget',
-            height: 48
-          }
+            app: 53336238,
+            redirectUrl: 'https://vk-auth-test.onrender.com/callback.html', // Ваш redirect_uri
+            state: 'csrf_token_12345',
+            containerID: 'vk-id-container'
         });
-      } else {
-        console.error('VKIDSDK не загрузился');
-      }
-    };
-  </script>
+    </script>
 </body>
 </html>
+
