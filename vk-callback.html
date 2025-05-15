@@ -1,2 +1,28 @@
-вамвы
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Обработка VK ID</title>
+</head>
+<body>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (code) {
+      // Отправка кода на сервер для обмена на токен
+      fetch('/exchange-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Обработка полученного токена
+        console.log('Токен:', data.token);
+      });
+    } else {
+      console.error('Код авторизации не получен');
+    }
+  </script>
+</body>
+</html>
