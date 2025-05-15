@@ -6,31 +6,50 @@
   <title>Авторизация через VK ID</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
     }
+
     h1 {
-      margin-bottom: 30px;
+      font-size: 24px;
+      margin-bottom: 40px;
+      color: #000;
     }
-    .vk-button {
+
+    .vk-id-button {
       display: inline-block;
+      background-color: #07f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      height: 40px;
+      line-height: 20px;
+      box-shadow: none;
+      border: none;
+      transition: background-color 0.3s;
     }
-    .vk-button img {
-      height: 48px;
-      cursor: pointer;
+
+    .vk-id-button:hover {
+      background-color: #006ee6;
     }
   </style>
 </head>
 <body>
   <h1>Авторизация через VK ID</h1>
-
-  <a class="vk-button" href="https://id.vk.com/auth?app_id=53336238&redirect_uri=https://vk-auth-test.onrender.com/vk-callback.html&response_mode=code">
-    <img src="https://id.vk.com/static/button.svg" alt="Войти через VK ID" />
+  <a 
+    class="vk-id-button" 
+    href="https://id.vk.com/auth?app_id=53336238&redirect_uri=https://vk-auth-test.onrender.com/vk-callback.html">
+    Войти с VK ID
   </a>
 </body>
 </html>
