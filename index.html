@@ -37,10 +37,10 @@
 
   <script>
     const vkAuthUrl = new URL("https://id.vk.com/auth");
-    vkAuthUrl.searchParams.set("app_id", "51797138"); // Твой VK App ID
-    vkAuthUrl.searchParams.set("redirect_uri", "https://vk-auth-test.onrender.com/callback"); // Обязательно БЕЗ .html
+    vkAuthUrl.searchParams.set("app_id", "51797138");
+    vkAuthUrl.searchParams.set("redirect_uri", "https://vk-auth-test.onrender.com/callback"); // 👈 ключевая правка
     vkAuthUrl.searchParams.set("response_type", "code");
-    vkAuthUrl.searchParams.set("state", "csrf_token_" + Math.random().toString(36).substring(2));
+    vkAuthUrl.searchParams.set("state", "csrf_" + Math.random().toString(36).substring(2));
     vkAuthUrl.searchParams.set("v", "5.199");
 
     document.getElementById("vk-auth-link").href = vkAuthUrl.toString();
